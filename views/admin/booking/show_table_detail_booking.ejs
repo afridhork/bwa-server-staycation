@@ -1,0 +1,44 @@
+<div class="card shadow mb-4">
+   <div class="card-header py-3">
+       <a href="/admin/booking" class="btn btn-warning" href="">Back</a>
+   </div>
+   <div class="card-body">
+      <div class="row">
+         <div class="col-md-5">
+            <img src="http://localhost:3000/<%= booking.payments.proofPayment %>" alt="" style="width: 100%;">
+            <% if(booking.payments.status == 'Proses'){ %>
+               <div class="row">
+                  <form class="ml-4" action="/admin/booking/<%= booking.id %>/confirmation?_method=PUT" method="POST">
+                     <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"> Confirmation</i></button>
+                 </form>
+                  <form class="ml-3" action="/admin/booking/<%= booking.id %>/reject?_method=PUT" method="POST">
+                     <button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-times"> Reject</i></button>
+                 </form>
+               </div>
+            <% } %>
+         </div>
+         <div class="col-md-7">
+            <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTableActivity" width="100%" cellspacing="0">
+                     <thead>
+                        <tr>
+                           <th>Name Member</th>
+                           <th>Total</th>
+                           <th>Bank From</th>
+                           <th>Title</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td><%= booking.memberId.firstName %> <%= booking.memberId.lastName %></td>
+                           <td><%= booking.total %></td>
+                           <td><%= booking.payments.bankForm %></td>
+                           <td><%= booking.itemId.title %></td>
+                        </tr>
+                     </tbody>
+                  </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

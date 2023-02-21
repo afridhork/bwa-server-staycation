@@ -1,0 +1,16 @@
+<div class="tab-pane border fade show active" id="show-item" role="tabpanel" aria-labelledby="home-tab">
+   <div class="row px-2">
+      <% for (let i = 0; i < item.imageId.length; i++) { %>
+         <div class="col-4">
+            <div class="card shadow my-4">
+               <div class="card-body">
+                  <img src="http://localhost:3000/<%= item.imageId[i].imageUrl %>" alt="" style="width:100%;display: block;">
+               </div>
+            </div>
+         </div>
+      <% } %>
+   </div>
+</div>
+<div class="pt-2">
+   <a href="/admin/item" class="btn btn-warning">Back</a>
+</div>
