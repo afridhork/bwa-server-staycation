@@ -36,8 +36,8 @@ module.exports = {
          for(let i = 0; i< category.length; i++) {
             for(let x = 0; x< category[i].itemId.length; x++) {
                const item = await Item.findOne({_id:category[i].itemId[x]._id})
-               item.isPopular = false
-               await item.save()
+               // item.isPopular = false
+               // await item.save()
                if(category[i].itemId[0] === category[i].itemId[x]) {
                   item.isPopular = true
                   await item.save()
@@ -116,6 +116,7 @@ module.exports = {
             proofPayment
          } = req.body
 
+         console.log('cek file',req.file);
          if(!req.file){
             return res.status(404).json({message:"Image not found"})
          }
@@ -170,7 +171,6 @@ module.exports = {
          const booking = await Booking.create(newBooking)
 
          res.status(201).json({message:"Success Booking", booking})
-
       } catch (error) {
          console.log(error);
          res.status(500).json({message:"Internal server error", error})
