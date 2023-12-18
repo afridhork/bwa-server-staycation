@@ -1,10 +1,11 @@
 {
-   "rewrites": [
-     { "source": "/api/(.*)", "destination": "/api/$1" },
-     { "source": "/(.*)", "destination": "/$1" }
-   ],
-   "headers": [
-     { "source": "/(.*)", "headers": [{ "key": "Access-Control-Allow-Origin", "value": "origin-list" }] }
-   ]
- }
- 
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/routes/api/$1" },
+    { "source": "/users/(.*)", "destination": "/routes/users/$1" },
+    { "source": "/admin/(.*)", "destination": "/routes/admin/$1" },
+    { "source": "/(.*)", "destination": "/$1" }
+  ],
+  "headers": [
+    { "source": "/(.*)", "headers": [{ "key": "Access-Control-Allow-Origin", "value": "origin-list" }] }
+  ]
+}
