@@ -36,13 +36,13 @@ module.exports = {
          if(!user) {
             req.flash('alertMessage','Username yang anda masukkan salah')
             req.flash('alertStatus','danger')
-            res.redirect('/admin/signin')
+            return res.redirect('/admin/signin')
          }
          const isPasswordMatch = await bcrypt.compare(password, user.password)
          if(!isPasswordMatch){
             req.flash('alertMessage','Password yang anda masukkan salah')
             req.flash('alertStatus','danger')
-            res.redirect('/admin/signin')
+            return res.redirect('/admin/signin')
          }
 
          req.session.user = {
@@ -50,9 +50,9 @@ module.exports = {
             username: user.username
          }
 
-         res.redirect('/admin/dashboard')
+         return res.redirect('/admin/dashboard')
       } catch (error) {
-         res.redirect('/admin/signin')
+         return res.redirect('/admin/signin')
       }
    },
    actionSignout: async (req, res) => {
