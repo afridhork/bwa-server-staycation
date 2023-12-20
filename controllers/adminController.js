@@ -39,7 +39,7 @@ module.exports = {
             return res.redirect('/admin/signin')
          }
          const isPasswordMatch = await bcrypt.compare(password, user.password)
-         if(!isPasswordMatch){
+         if(!isPasswordMatch){ //the password rahasia
             req.flash('alertMessage','Password yang anda masukkan salah')
             req.flash('alertStatus','danger')
             return res.redirect('/admin/signin')
