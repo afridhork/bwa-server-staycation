@@ -5,11 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const methodOverride = require('method-override')
 const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
 //connect mongoose
 const mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost:27017/db_bwamern_staycation');
-mongoose.connect('mongodb+srv://pidorkartawiria:anaklusmos@cluster0.ya6jcts.mongodb.net/db_staycation?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://pidorkartawiria:ZSk304F5rbI681Lv@cluster0.ya6jcts.mongodb.net/db_staycation?retryWrites=true&w=majority');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -18,6 +19,11 @@ const adminRouter = require('./routes/admin');
 const apiRouter = require('./routes/api');
 
 var app = express();
+
+const store = new MongoDBStore({
+  uri: 'mongodb+srv://pidorkartawiria:ZSk304F5rbI681Lv@cluster0.ya6jcts.mongodb.net/db_staycation?retryWrites=true&w=majority',
+  collection: 'sessions',
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +34,8 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 60000 },
+  store: store
 }))
 app.use(flash());
 app.use(logger('dev'));
