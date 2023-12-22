@@ -1,22 +1,11 @@
 {
   "version": 2,
+  "builds": [
+    { "src": "app.js", "use": "@now/node" }
+  ],
   "routes": [
-    { "handle": "filesystem" },
-    {
-      "src": "/api/v1/(.*)",
-      "dest": "/routes/api.js"
-    },
-    {
-      "src": "/users/(.*)",
-      "dest": "/routes/users.js"
-    },
-    {
-      "src": "/admin/(.*)",
-      "dest": "/routes/admin.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/routes/index.js"
-    }
+    { "src": "/api/(.*)", "dest": "/app.js" },
+    { "src": "/admin/(.*)", "dest": "/app.js" },
+    { "src": "/(.*)", "dest": "/app.js" }
   ]
 }
