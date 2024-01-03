@@ -7,6 +7,7 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
+const config = require('./config');
 //connect mongoose
 const mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost:27017/db_bwamern_staycation');
@@ -58,6 +59,14 @@ app.use('/api/v1', apiRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+});
+
+app.get('/', (req, res) => {
+  // Use the base URL from the configuration file
+  const baseUrl = process.env.NODE_ENV === 'production' ? config.production.baseUrl : config.development.baseUrl;
+
+  // Pass the base URL to your view
+  res.render('index', { baseUrl });
 });
 
 // Add headers before the routes are defined

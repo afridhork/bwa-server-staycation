@@ -17,10 +17,12 @@ module.exports = {
          const alertMessage = req.flash('alertMessage')
          const alertStatus = req.flash('alertStatus')
          const alert = {message: alertMessage, status: alertStatus}
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          if(req.session.user == null || req.session.user == undefined) {
             res.render('index',{
                alert,
-               title: 'Staycation | Login'
+               title: 'Staycation | Login',
+               baseUrl
             })
          }else{
             res.redirect('/admin/dashboard')
@@ -64,12 +66,14 @@ module.exports = {
          const member = await Member.find()
          const booking = await Booking.find()
          const item = await Item.find()
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          res.render('admin/dashboard/view_dashboard',{ 
             member,
             booking,
             item,
             title: 'Staycation | Dashboard',
-            user:req.session.user
+            user:req.session.user,
+            baseUrl
          })
          
       } catch (error) {
@@ -82,11 +86,13 @@ module.exports = {
          const alertMessage = req.flash('alertMessage')
          const alertStatus = req.flash('alertStatus')
          const alert = {message: alertMessage, status: alertStatus}
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          res.render('admin/category/view_category',{
             category,
             alert,
             title: 'Staycation | Category',
-            user:req.session.user
+            user:req.session.user,
+            baseUrl
          })
       } catch (error) {
          res.render('admin/category')
@@ -141,11 +147,13 @@ module.exports = {
          const alertMessage = req.flash('alertMessage')
          const alertStatus = req.flash('alertStatus')
          const alert = {message: alertMessage, status: alertStatus}
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          res.render('admin/bank/view_bank',{
             bank,
             alert,
             title: 'Staycation | bank',
-            user:req.session.user
+            user:req.session.user,
+            baseUrl
          })
       } catch (error) {
          res.render('admin/bank')
@@ -223,14 +231,15 @@ module.exports = {
          const alertMessage = req.flash('alertMessage')
          const alertStatus = req.flash('alertStatus')
          const alert = {message: alertMessage, status: alertStatus}
-         console.log('user', req.session.user);
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          res.render('admin/item/view_item',{
             item,
             category,
             alert,
             action: 'view',
             title: 'Staycation | Item',
-            user:req.session.user
+            user:req.session.user,
+            baseUrl
          })
       } catch (error) {
          req.flash('alertMessage',`${error.message}`)
@@ -277,12 +286,14 @@ module.exports = {
          const alertMessage = req.flash('alertMessage')
          const alertStatus = req.flash('alertStatus')
          const alert = {message: alertMessage, status: alertStatus}
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          res.render('admin/item/view_item',{
             item,
             alert,
             action: 'show image',
             title: 'Staycation | Item',
-            user:req.session.user
+            user:req.session.user,
+            baseUrl
          })
       } catch (error) {
          req.flash('alertMessage',`${error.message}`)
@@ -300,12 +311,14 @@ module.exports = {
          const alertMessage = req.flash('alertMessage')
          const alertStatus = req.flash('alertStatus')
          const alert = {message: alertMessage, status: alertStatus}
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          res.render('admin/item/view_item',{
             item,
             alert,
             category,
             action: 'edit item',
-            title: 'Staycation | Edit Item'
+            title: 'Staycation | Edit Item',
+            baseUrl
          })
       } catch (error) {
          req.flash('alertMessage',`${error.message}`)
@@ -394,13 +407,15 @@ module.exports = {
          const alert = {message: alertMessage, status: alertStatus}
          const feature = await Feature.find({itemId: itemId})
          const activity = await Activity.find({itemId: itemId})
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          res.render('admin/item/detail_item/view_detail_item',{ 
             title: 'Staycation | Item',
             alert,
             itemId,
             feature,
             activity,
-            user:req.session.user
+            user:req.session.user,
+            baseUrl
          })
       } catch (error) {
          req.flash('alertMessage',`${error.message}`)
@@ -572,11 +587,13 @@ module.exports = {
          const alertMessage = req.flash('alertMessage')
          const alertStatus = req.flash('alertStatus')
          const alert = {message: alertMessage, status: alertStatus}
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          res.render('admin/booking/view_booking',{
             booking,
             alert,
             title: 'Staycation | Booking',
-            user:req.session.user
+            user:req.session.user,
+            baseUrl
          })
       } catch (error) {
          res.redirect('/admin/booking')
@@ -588,10 +605,12 @@ module.exports = {
          const booking = await Booking.findOne({_id:id})
             .populate('memberId')
             .populate('bankId')
+         const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bwa-server-staycation-flame.vercel.app/' : 'http://localhost:4000/';
          res.render('admin/booking/show_detail_booking',{
             booking,
             title: 'Staycation | Booking',
-            user:req.session.user
+            user:req.session.user,
+            baseUrl
          })
       } catch (error) {
          res.redirect('/admin/booking')
