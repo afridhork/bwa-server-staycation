@@ -10,7 +10,12 @@ const flash = require('connect-flash');
 //connect mongoose
 const mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost:27017/db_bwamern_staycation');
-mongoose.connect('mongodb+srv://pidorkartawiria:ZSk304F5rbI681Lv@cluster0.ya6jcts.mongodb.net/db_staycation?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://pidorkartawiria:ZSk304F5rbI681Lv@cluster0.ya6jcts.mongodb.net/db_staycation?retryWrites=true&w=majority',{
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true, // This is often recommended to avoid deprecation warning for collection.ensureIndex
+  useFindAndModify: false // To use findOneAndUpdate() instead of findAndModify()
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
